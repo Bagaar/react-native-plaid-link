@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 
 class PlaidAuthenticator extends Component {
   render() {
-    const {publicKey, selectAccount, env, product, clientName, webhook, style, token} = this.props;
+    const {publicKey, selectAccount, env, product, clientName, webhook, style, token, injectedJavaScript} = this.props;
 
     let uri = `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&apiVersion=v2&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&webhook=${webhook}&selectAccount=${selectAccount}`
     uri = token !== undefined ? `${uri}&token=${token}` : uri
@@ -13,6 +13,7 @@ class PlaidAuthenticator extends Component {
       style={{...style}}
       source={{uri}}
       onMessage={(e) => this.onMessage(e)}
+      injectedJavaScript={injectedJavaScript}
     />
   }
 
